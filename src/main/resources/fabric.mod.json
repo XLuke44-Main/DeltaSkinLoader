@@ -1,0 +1,35 @@
+
+{
+  "schemaVersion": 1,
+  "id": "deltaskinloader",
+  "version": "${version}",
+  "name": "DeltaSkinLoader",
+  "description": "Loads local player skins, capes, and elytra textures with per-player settings.",
+  "authors": [
+    "XLuke44"
+  ],
+  "license": "BSD-3-Clause",
+  "icon": "assets/deltaskinloader/logo.png",
+
+  "contact": {
+    "sources": "https://github.com/XLuke44-Main/DeltaSkinLoader",
+    "issues": "https://github.com/XLuke44-Main/DeltaSkinLoader/issues",
+    "homepage": "https://github.com/XLuke44-Main/DeltaSkinLoader"
+  },
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.XLuke44.DeltaSkinLoader.DeltaSkinLoader"
+    ]
+  },
+  "mixins": [
+    "deltaskinloader.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "1.18.2",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
+}

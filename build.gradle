@@ -1,0 +1,38 @@
+plugins {
+    id 'fabric-loom' version '1.11.8'
+}
+
+group = 'com.XLuke44.DeltaSkinLoader'
+version = '1.0.1'
+
+dependencies {
+    minecraft "com.mojang:minecraft:1.18.2"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:0.20.1"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.77.0+1.18.2"
+}
+
+def modVersion = project.version.toString()
+
+processResources {
+    inputs.property "version", modVersion
+
+    filesMatching("fabric.mod.json") {
+        expand "version": modVersion
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+    options.encoding = 'UTF-8'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE.txt")
+}
