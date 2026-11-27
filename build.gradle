@@ -1,0 +1,93 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:[6.0,6.2)'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+
+def minecraftVersion = '1.18.2'
+def forgeVersion = '40.3.0'
+
+def modId = 'deltaskinloader'
+def modName = 'DeltaSkinLoader'
+def modVersion = '1.0.1'
+def modAuthors = 'XLuke44'
+def modLicense = 'BSD-3-Clause'
+def modDescription = 'Local Skin Loader'
+
+group = "xluke44.${modId}"
+version = modVersion
+
+base {
+    archivesName = modId
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
+minecraft {
+    mappings channel: 'official', version: minecraftVersion
+
+    runs {
+        data {
+            workingDirectory project.file('run-data')
+
+            mods {
+                "${modId}" {
+                    source sourceSets.main
+                }
+            }
+
+            args '--mod', modId,
+                 '--all',
+                 '--output', file('src/generated/resources/'),
+                 '--existing', file('src/main/resources/')
+        }
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    def properties = [
+        minecraft_version      : minecraftVersion,
+        minecraft_version_range: '[1.18.2]',
+        forge_version           : forgeVersion,
+        forge_version_range     : '[40,)',
+        loader_version_range    : '[40,)',
+        mod_id                  : modId,
+        mod_name                : modName,
+        mod_license             : modLicense,
+        mod_version             : modVersion,
+        mod_authors             : modAuthors,
+        mod_description         : modDescription
+    ]
+
+    inputs.properties properties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand properties
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    from 'LICENSE.txt'
+    finalizedBy 'reobfJar'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
