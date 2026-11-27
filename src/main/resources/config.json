@@ -1,0 +1,20 @@
+{
+  "noskinfile": {
+    "self": {
+      "enabled": true,
+      "model": "classic",
+      "skin": "steve"
+    },
+    "others": {
+      "enabled": false,
+      "model": "classic",
+      "skin": "steve"
+    }
+  },
+  "enableByDefault": true,
+  "customDefaultSkins": false,
+  "enableSkinOverride": true,
+  "enableSkinTransparency": true,
+  "enableCape": true,
+  "enableCustomElytra": true
+}

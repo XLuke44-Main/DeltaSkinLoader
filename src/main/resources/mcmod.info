@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "deltaskinloader",
+    "name": "DeltaSkinLoader",
+    "description": "Local Skin Loader",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/XLuke44-Main/DeltaSkinLoader",
+    "updateUrl": "",
+    "authorList": ["XLuke44"],
+    "credits": "",
+    "logoFile": "logo.png",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
